@@ -110,7 +110,7 @@ ViTAEv2 denotes the version using window attention for all stages.
 
 Please refer to our paper for more experimental results.
 ## Statement
-This project is for research purpose only. For any other questions please contact [yufei.xu at outlook.com](mailto:yufei.xu@outlook.com) [qmzhangzz at hotmail.com](mailto:qmzhangzz@hotmail.com) .
+This project is for research purpose only. For any other questions please contact [qmzhangzz at hotmail.com](mailto:qmzhangzz@hotmail.com) [yufei.xu at outlook.com](mailto:yufei.xu@outlook.com).
 
 ## Citing VSA
 ```
