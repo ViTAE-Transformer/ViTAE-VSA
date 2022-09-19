@@ -164,6 +164,7 @@ The trained model file will be saved under the ```output``` folder
 ## Statement
 This project is for research purpose only. For any other questions please contact [qmzhangzz at hotmail.com](mailto:qmzhangzz@hotmail.com) [yufei.xu at outlook.com](mailto:yufei.xu@outlook.com).
 
+The code base is borrowed from [T2T](https://github.com/yitu-opensource/T2T-ViT) and [ViTAEv2](https://github.com/ViTAE-Transformer/ViTAE-Transformer).
 ## Citing ViTAE and ViTAEv2
 ```
 @article{zhang2022vsa,
