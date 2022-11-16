@@ -62,31 +62,6 @@ def resume_checkpoint(model, checkpoint_path, optimizer=None, loss_scaler=None, 
             if log_info:
                 _logger.info('Restoring model state from checkpoint...')
             new_state_dict = load_state_dict(checkpoint_path=checkpoint_path, model=model, use_ema=False)
-
-
-            # delete relative_coords_table since we always re-init it
-            relative_position_index_keys = [k for k in new_state_dict.keys() if "relative_coords_table" in k]
-            for k in relative_position_index_keys:
-                del new_state_dict[k]
-
-            relative_position_bias_table_keys = [k for k in new_state_dict.keys() if "relative_position_bias_table" in k]
-            for k in relative_position_bias_table_keys:
-                relative_position_bias_table_pretrained = new_state_dict[k]
-                relative_position_bias_table_current = model.state_dict()[k]
-                L1, nH1 = relative_position_bias_table_pretrained.size()
-                L2, nH2 = relative_position_bias_table_current.size()
-                if nH1 != nH2:
-                    print(f"Error in loading {k}, passing......")
-                else:
-                    if L1 != L2:
-                        # bicubic interpolate relative_position_bias_table if not match
-                        S1 = int(L1 ** 0.5)
-                        S2 = int(L2 ** 0.5)
-                        relative_position_bias_table_pretrained_resized = torch.nn.functional.interpolate(
-                            relative_position_bias_table_pretrained.permute(1, 0).view(1, nH1, S1, S1), size=(S2, S2),
-                            mode='bicubic')
-                        new_state_dict[k] = relative_position_bias_table_pretrained_resized.view(nH2, L2).permute(1, 0)
-
             model.load_state_dict(new_state_dict)
 
             if optimizer is not None and 'optimizer' in checkpoint:
@@ -146,6 +121,29 @@ def load_state_dict(checkpoint_path, model, use_ema=False, num_classes=1000, del
             if model.pos_embed.shape != old_posemb.shape:  # need resize the position embedding by interpolate
                 new_posemb = resize_pos_embed(old_posemb, model.pos_embed)
                 state_dict['pos_embed'] = new_posemb
+
+        # delete relative_coords_table since we always re-init it
+        relative_position_index_keys = [k for k in state_dict.keys() if "relative_coords_table" in k]
+        for k in relative_position_index_keys:
+            del state_dict[k]
+
+        relative_position_bias_table_keys = [k for k in state_dict.keys() if "relative_position_bias_table" in k]
+        for k in relative_position_bias_table_keys:
+            relative_position_bias_table_pretrained = state_dict[k]
+            relative_position_bias_table_current = model.state_dict()[k]
+            L1, nH1 = relative_position_bias_table_pretrained.size()
+            L2, nH2 = relative_position_bias_table_current.size()
+            if nH1 != nH2:
+                print(f"Error in loading {k}, passing......")
+            else:
+                if L1 != L2:
+                    # bicubic interpolate relative_position_bias_table if not match
+                    S1 = int(L1 ** 0.5)
+                    S2 = int(L2 ** 0.5)
+                    relative_position_bias_table_pretrained_resized = torch.nn.functional.interpolate(
+                        relative_position_bias_table_pretrained.permute(1, 0).view(1, nH1, S1, S1), size=(S2, S2),
+                        mode='bicubic')
+                    state_dict[k] = relative_position_bias_table_pretrained_resized.view(nH2, L2).permute(1, 0)
 
         return state_dict
     else:
