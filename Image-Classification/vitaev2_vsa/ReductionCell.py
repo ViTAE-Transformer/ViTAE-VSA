@@ -135,7 +135,7 @@ class ReductionCell(nn.Module):
             # self.attn = None
             self.norm1 = nn.LayerNorm(in_chans)
             if self.cpe:
-                self.pos = nn.Conv2d(in_chans, in_chans, window_size//2*2+1, 1, window_size//2, groups=in_chans, bias=True)
+                self.pos = nn.Conv2d(in_chans, in_chans, 7, 1, 3, groups=in_chans, bias=True)
                 print('using residual cpe before attention')
             self.attn = VSAWindowAttention(
                 in_chans, out_dim=token_dims, num_heads=num_heads, window_size=window_size, qkv_bias=True, qk_scale=None,

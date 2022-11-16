@@ -68,13 +68,13 @@ class BasicLayer(nn.Module):
             self.RC = PatchEmbedding(inter_channel=token_dims//2, out_channels=token_dims, img_size=img_size)
         elif downsample_ratios > 1:
             self.RC = ReductionCell(img_size, in_chans, embed_dims, wide_pcm, token_dims, downsample_ratios, kernel_size,
-                            RC_heads, dilations, op=RC_op, tokens_type=RC_tokens_type, group=RC_group, relative_pos=relative_pos, cpe=cpe, num_deform=num_deform)
+                            RC_heads, dilations, op=RC_op, tokens_type=RC_tokens_type, group=RC_group, window_size=window_size, relative_pos=relative_pos, cpe=cpe)
         else:
             self.RC = nn.Identity()
         self.NC = nn.ModuleList([
             NormalCell(token_dims, NC_heads, mlp_ratio=mlp_ratio, qkv_bias=qkv_bias, qk_scale=qk_scale, drop=drop, attn_drop=attn_drop,
                        drop_path=dpr[i] if isinstance(dpr, list) else dpr, norm_layer=norm_layer, class_token=class_token, group=NC_group, tokens_type=NC_tokens_type,
-                       img_size=img_size // downsample_ratios, window_size=window_size, shift_size=0, relative_pos=relative_pos, cpe=cpe, num_deform=num_deform)
+                       img_size=img_size // downsample_ratios, window_size=window_size, shift_size=0, relative_pos=relative_pos, cpe=cpe)
         for i in range(NC_depth)])
 
     def forward(self, x):

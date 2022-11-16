@@ -127,7 +127,7 @@ class NormalCell(nn.Module):
         if tokens_type == 'VSA':
             self.cpe = cpe
             if self.cpe:
-                self.pos = nn.Conv2d(dim, dim, window_size//2*2+1, 1, window_size//2, groups=dim, bias=True)
+                self.pos = nn.Conv2d(dim, dim, 7, 1, 3, groups=dim, bias=True)
                 print('using residual cpe before attention')
             self.attn = VSAWindowAttention(
                 dim, out_dim=dim, num_heads=num_heads, window_size=window_size, qkv_bias=True, qk_scale=None, 
