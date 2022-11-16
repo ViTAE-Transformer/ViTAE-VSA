@@ -68,7 +68,7 @@ class BasicLayer(nn.Module):
             self.RC = PatchEmbedding(inter_channel=token_dims//2, out_channels=token_dims, img_size=img_size)
         elif downsample_ratios > 1:
             self.RC = ReductionCell(img_size, in_chans, embed_dims, wide_pcm, token_dims, downsample_ratios, kernel_size,
-                            RC_heads, dilations, op=RC_op, tokens_type=RC_tokens_type, group=RC_group, relative_pos=relative_pos, cpe=cpe, num_deform=num_deform)
+                            RC_heads, dilations, op=RC_op, tokens_type=RC_tokens_type, group=RC_group, window_size=window_size, relative_pos=relative_pos, cpe=cpe, num_deform=num_deform)
         else:
             self.RC = nn.Identity()
         self.NC = nn.ModuleList([

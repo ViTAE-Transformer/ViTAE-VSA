@@ -70,3 +70,15 @@ def ViTAEv2_VSA_widePCM_B(pretrained=False, **kwargs): # adopt performer for tok
         load_pretrained(
             model, num_classes=model.num_classes, in_chans=kwargs.get('in_chans', 3))
     return model
+
+@register_model
+def ViTAEv2_VSA_widePCM_B_ws12(pretrained=False, **kwargs): # adopt performer for tokens to token
+    # if pretrained:
+        # kwargs.setdefault('qk_scale', 256 ** -0.5)
+    model = ViTAE_VSA_basic(RC_tokens_type=['VSA', 'VSA', 'VSA', 'VSA'], NC_tokens_type=['VSA', 'VSA', 'VSA', 'VSA'], stages=4, embed_dims=[128, 128, 256, 512], token_dims=[128, 256, 512, 1024], downsample_ratios=[4, 2, 2, 2],
+                            NC_depth=[2, 2, 12, 2], NC_heads=[4, 8, 16, 32], RC_heads=[4, 8, 16, 32], mlp_ratio=4., NC_group=[1, 32, 64, 128], RC_group=[1, 16, 32, 64], window_size=12, cpe=True, relative_pos=True, **kwargs)
+    model.default_cfg = default_cfgs['ViTAE_stages3_7']
+    if pretrained:
+        load_pretrained(
+            model, num_classes=model.num_classes, in_chans=kwargs.get('in_chans', 3))
+    return model
