@@ -111,8 +111,10 @@ class VSAWindowAttention(nn.Module):
         expanded_base_coords_h = expanded_base_coords_h.reshape(-1)
         expanded_base_coords_w = expanded_base_coords_w.reshape(-1)
         coords = torch.stack(torch.meshgrid(expanded_base_coords_w, expanded_base_coords_h), 0).permute(0, 2, 1).reshape(1, 2, window_num_h, self.ws, window_num_w, self.ws)
-        self.register_buffer('base_coords', window_reference+coords)
-        self.register_buffer('coords', coords)
+        self.base_coords = (window_reference+coords).cuda()
+        self.coords = coords.cuda()
+        # self.register_buffer('base_coords', window_reference+coords)
+        # self.register_buffer('coords', coords)
 
     def forward(self, x):
         b, _, h, w = x.shape
