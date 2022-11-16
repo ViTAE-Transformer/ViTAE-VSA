@@ -78,6 +78,8 @@ def resume_checkpoint(model, checkpoint_path, optimizer=None, loss_scaler=None, 
                 resume_epoch = checkpoint['epoch']
                 if 'version' in checkpoint and checkpoint['version'] > 1:
                     resume_epoch += 1  # start at the next epoch, old checkpoints incremented before save
+            else:
+                checkpoint['epoch'] = 0
 
             if log_info:
                 _logger.info("Loaded checkpoint '{}' (epoch {})".format(checkpoint_path, checkpoint['epoch']))
