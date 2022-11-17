@@ -1,4 +1,4 @@
-<h1 align="left">[ECCV 2020] VSA: Learning Varied-Size Window Attention in
+<h1 align="left">[ECCV 2022] VSA: Learning Varied-Size Window Attention in
 Vision Transformers<a href="https://arxiv.org/abs/2204.08446"><img src="https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg" ></a></h1> 
 
 <p align="center">
