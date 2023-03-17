@@ -63,10 +63,10 @@ Vision Transformers</a>. We design a novel varied-size window attention module w
 | Swin-T+VSA | 224x224 | 82.24 | 95.8 | \ | Coming Soon |
 | ViTAEv2*-S | 224x224 | 82.2 | 96.1 | 87.5 | \ |
 | ViTAEv2-S | 224x224 | 82.6 | 96.2 | 87.6 | [weights]()&[logs](Image-Classification/vitaev2/output/ViTAEv2_S.txt) |
-| ViTAEv2*-S+VSA | 224x224 | 82.7 | 96.3 | 87.7 | [weights]()&[logs](Image-Classification/vitaev2_vsa/output/ViTAEv2-S+VSA.txt) |
+| ViTAEv2*-S+VSA | 224x224 | 82.7 | 96.3 | 87.7 | [weights](https://1drv.ms/u/s!AimBgYV7JjTlgcgB0Xlyc3U4WO11AQ?e=AGRBDl)&[logs](Image-Classification/vitaev2_vsa/output/ViTAEv2-S+VSA.txt) |
 | Swin-S | 224x224 | 83.0 | \ | \ | \ |
 | Swin-S+VSA | 224x224 | 83.6 | 96.6 | \ | Coming Soon |
-| ViTAEv2*-48M+VSA | 224x224 | 83.9 | 96.6 | \ | [weights]()&[logs](Image-Classification/vitaev2_vsa/output/ViTAEv2-48M+VSA.txt) |
+| ViTAEv2*-48M+VSA | 224x224 | 83.9 | 96.6 | \ | [weights](https://1drv.ms/u/s!AimBgYV7JjTlgcgCOt1UwhNQRfO0bw?e=rtEQJV)&[logs](Image-Classification/vitaev2_vsa/output/ViTAEv2-48M+VSA.txt) |
 
 ### Models with ImageNet-22K pretraining
 | name | resolution | acc@1 | acc@5 | acc@RealTop-1 | Pretrained |
