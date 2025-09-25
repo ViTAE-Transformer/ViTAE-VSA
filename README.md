@@ -2,9 +2,10 @@
 Vision Transformers<a href="https://arxiv.org/abs/2204.08446"><img src="https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg" ></a></h1> 
 
 <p align="center">
-  <a href="#Updates">Updates</a> |
+  <a href="#updates">Updates</a> |
   <a href="#introduction">Introduction</a> |
   <a href="#statement">Statement</a> |
+  <a href="#citing-vsa-and-vitae">Citation</a> |
 </p>
 
 ## Current applications
